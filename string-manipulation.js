@@ -5,6 +5,7 @@ console.log('Hey! Jessie the Jameson here, let me get to know you!\n');
 var firstName = ask.question('Okay, Your first name? ');
 var lastName = ask.question('Last name? ');
 
+// Changes the first letter of the first and last names to Upper case letters
 var newFirstName = firstName.charAt(0).toUpperCase() + firstName.slice(1,firstName.length);
 var newLastName = lastName.charAt(0).toUpperCase() + lastName.slice(1,lastName.length);
 
@@ -22,6 +23,7 @@ console.log( '\nAlright, ' + age + ' year old ' + newFirstName + ' ' + newLastNa
 
 var message = ask.question( 'Tell me a little bit more about yourself: ' );
 
+// Checks to see if message is greater than 20 characters
 if (message.length > 20) {
 	
 	var newMessage = message.slice( Math.round(message.length / 2), message.length );
