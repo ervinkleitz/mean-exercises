@@ -22,4 +22,4 @@ for ( var j = 0; j < array.length; j++ ) {
 
 }
 // Prints out the lowest number
-console.log( 'The lowest number in the list is: 'array[lowest]);
+console.log( 'The lowest number in the list is: ' + array[lowest]);
