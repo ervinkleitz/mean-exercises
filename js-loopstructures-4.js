@@ -7,7 +7,7 @@ var lowest = 0;
 //Accepts numbers and pushes them into 'array'
 for ( var i = 1; i <= 10; i++ ) {
 	var input = ask.question( 'Enter a number: ' );
-	array.push(input);
+	array.push( parseInt(input) );
 }
 
 // Checks each number in 'array' against the others
@@ -19,4 +19,4 @@ for ( var i = 1; i <= 10; i++ ) {
 	}
 
 // Prints out the lowest number
-console.log( 'The lowest number in the list is: ' + array[lowest]);
+console.log( 'The lowest number in the list is: ' + array[lowest].toString() );
