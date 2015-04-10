@@ -16,7 +16,7 @@ var age = ask.question( 'And what is your age (don\'t worry, we won\'t tell)?: '
 console.log( '\nWhat?! No! You make me feel like the crypt keeper!' );
 
 var randomQ = ask.question( 'Now, if you could change your last name, what would it be? ' );
-var newRandomQ = randomQ.charAt(0).toUpperCase() + randomQ.slice(1,lastName.length);
+var newRandomQ = randomQ.charAt(0).toUpperCase() + randomQ.slice(1,randomQ.length);
 
 console.log( '\nAlright, ' + age + ' year old ' + newFirstName + ' ' + newLastName + '(' + newRandomQ + ')' + '.\n');
 
