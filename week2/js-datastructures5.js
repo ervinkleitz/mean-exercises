@@ -2,11 +2,11 @@ var printMatrix = function ( dimensions ) {
 
 	var matrix = [];
 
-	for ( i = 0; i < dimensions; i++ ){
+	for ( var xCoordinates = 0; xCoordinates < dimensions; xCoordinates++ ){
 		var line = [];
 		// Traversing rows
-		for (var j = 0; j < dimensions; j++) {
-			line.push([i,j]);
+		for (var yCoordinates = 0; yCoordinates < dimensions; yCoordinates++) {
+			line.push( [xCoordinates, yCoordinates] );
 		}
 		
 		console.log(line);

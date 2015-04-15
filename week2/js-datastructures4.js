@@ -6,12 +6,10 @@ var makeMatrix = function ( n ) {
 		return Math.floor( Math.random() * 9 );
 	}
 
-	for (var i = 0; i < n; i++) {
-		
+	for (var xCoordinates = 0; xCoordinates < n; xCoordinates++) {
 		var arrayLine = [];
 
-		for (var j = 0; j < n ; j++) {
-		
+		for (var yCoordinates = 0; yCoordinates < n ; yCoordinates++) {
 			line.push( makeRandomNumber() );
 
 		}
