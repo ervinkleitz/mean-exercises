@@ -5,12 +5,12 @@ var Person = function ( name, age, friends ) {
 };
 // Method to add one year to birthday
 Person.prototype.birthday = function () {
-	return this.age++;
+	this.age++;
 };
 // Method to add another friend to Person
 Person.prototype.addFriend = function ( friend ) {
 	this.friends[this.friends.length] = friend;
-	return this.friends;
+	this.friends;
 };
 // Five Person instances
 var Mike = new Person( 'Mike', 11, ['Mark', 'John']);
