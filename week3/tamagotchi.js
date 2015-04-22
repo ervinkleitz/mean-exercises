@@ -28,11 +28,11 @@ var monster = {
 	},
 	starve: function(){
 		this.hp -= 10;
-		console.log('\nBecause you took so long, ' + tamaName + ' has died a little.')
+		console.log('\n' + tamaName + ' has died a little.')
 	}
 };
 
-var keepGoing = setInterval(everyFiveSeconds, 2000);
+var keepGoing = setInterval(everyFiveSeconds, 5000);
 
 function everyFiveSeconds() {
 	if ( monster.hp > 0 ) {
@@ -55,5 +55,9 @@ function everyFiveSeconds() {
 		}
 
 		console.log( '\n' + tamaName + ' is at ' + monster.hp + '% heath.');
-	} else { clearInterval(keepGoing); }
+
+	} else { 
+		clearInterval(keepGoing); 
+		monster.die();
+	}
 }
