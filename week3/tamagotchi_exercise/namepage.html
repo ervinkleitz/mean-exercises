@@ -16,10 +16,13 @@
 		<h2 class="tamaName"></h2>
 	</header>
 	<div class="container">
-		<button id="start" type="button" onclick="start();">START</button>
+		<p>Give your pet a name</p>
+		<form>
+			<input id="tamaName" type="text" value="name">
+		</form>
 		<p class="status"></p>
 		<p id="output"></p>
-		<a href="namepage.html"><button id="namepage" type="button">NEXT</button></a>
+		<button id="confirm" type="button" onclick="getTamaName();">CONFIRM</button>
 	</div>
 
 	<footer>
