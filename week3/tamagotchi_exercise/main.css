@@ -1,0 +1,41 @@
+body {
+	
+	font-family: 'PT Sans', sans-serif;
+	color: white;
+	width: 30%;
+	text-align: center;
+
+}
+
+header {
+	font-family: 'Flavors', sans-serif;
+	background-color: #CC3300;
+	height: 7em;
+	text-align: center;
+	padding-top: 1em;
+	border-top-right-radius: 10px;
+	border-top-left-radius: 10px;
+}
+
+footer {
+	background-color: #CC3300;
+	height: 2em;
+	text-align: center;
+	padding-top: 1em;
+	border-bottom-right-radius: 10px;
+	border-bottom-left-radius: 10px;
+}
+
+button {
+	margin-top: 10px;
+	height: 30px;
+}
+
+p {
+	color: black;
+}
+
+.container {
+	border: solid 1px #CC3300;
+	padding: 5px;
+}
