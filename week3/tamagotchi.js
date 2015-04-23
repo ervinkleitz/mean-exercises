@@ -36,7 +36,7 @@ var keepGoing = setInterval(everyFiveSeconds, 5000);
 
 function everyFiveSeconds() {
 	if ( monster.hp > 0 ) {
-		console.log( '\n' + tamaName + monster['emotions'][Math.floor(Math.random() * 3)] );
+		console.log( '\n\n' + tamaName + monster['emotions'][Math.floor(Math.random() * 3)] );
 		console.log( '\nWhat do you want to do?' );
 		var action = ask.question( 'Choose one (a - Feed him, b - pet him, c - kick him in the shin): ' ).toLowerCase().trim();
 
