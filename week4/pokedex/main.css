@@ -10,3 +10,8 @@
 .data-area {
     height: 10em;
 }
+
+#pokemon-list {
+    height: 150px;
+    overflow: auto;
+}

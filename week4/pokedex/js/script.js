@@ -1,6 +1,6 @@
 $(document).ready(function(){ 
     
-    var pokemonName, pokemonData, pokemonType, pokemonMoves, masterPokemonList;
+    var pokemonName, pokemonData, pokemonType, pokemonMoves, masterPokemonList, dataId, dataIdForSprite;
     var pokemonList = '';
     
     $.ajax('http://pokeapi.co/api/v1/pokedex/1/', {
@@ -11,9 +11,15 @@ $(document).ready(function(){
       console.log('Populate Dropdown list fail');
     });
     
-    populatePokemon(35);
+    populatePokemon('bulbasaur');
+    var chosenPokemon = 'voltorb'
     
-//    document.getElementById( 'pokemon-list' ).addEventListener( 'change', populatePokemon(17) );
+    document.getElementById( 'pokemon-list' ).addEventListener( 'click', displayPokemon );
+    
+    function displayPokemon(){
+        var pokemon = this.id;
+        console.log(pokemon);
+    }
     
     //Function to populate dropdown list
     function populateDropdown ( data ){
@@ -21,62 +27,84 @@ $(document).ready(function(){
         for ( var index = 0; index < data[ 'pokemon' ].length; index++ ){
             pokemonName = data[ 'pokemon' ][index][ 'name' ];
             //Uses Pokemon's name as target for href
-            pokemonList += '<li><a href="#" value="' + pokemonName+'">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
+            pokemonList += '<li><a href="#" id="' + pokemonName+'">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
         }
         
         //Populates dropdown list and first pokemon
         document.getElementById( 'pokemon-list' ).innerHTML = pokemonList;
     }
     
-    function populatePokemon( pokedexId ) {
+    //Function to Populate info about chosen pokemon
+    function populatePokemon( pokemon ) {
         
-        $.ajax('http://pokeapi.co/api/v1/pokemon/' + pokedexId + '/', {
+        $.ajax('http://pokeapi.co/api/v1/pokedex/1/', {
           method: 'GET'
         })
-        .done( populatePokemonData )
+        .done( getMasterPokemonList )
         .fail( function () {
-          console.log('Default Pokemon fail');
+          console.log('Pokedex List fail');
         });
-    
-        function populatePokemonData ( data ) {
-
-            $.ajax('http://pokeapi.co/api/v1/sprite/'+ pokedexId + '/', {
+        
+        function getMasterPokemonList(data) {
+            masterPokemonList = data;
+            
+            for ( var i = 0; i < masterPokemonList['pokemon'].length; i++ ) {
+                if ( masterPokemonList['pokemon'][i]['name'] === pokemon )
+                    dataId = masterPokemonList['pokemon'][i]['resource_uri'];        
+            }
+            //Pokemon ID to be used to pull Images
+            //Note: Image IDs are higher from Pokemon IDs by 1
+            dataIdForSprite = parseInt( dataId.substring(15, dataId.length-1) ) + 1;
+            
+            $.ajax('http://pokeapi.co/' + dataId, {
               method: 'GET'
             })
-            .done( populateDefaultPic )
+            .done( populatePokemonData )
             .fail( function () {
-              console.log('Default Pic fail');
+              console.log('Default Pokemon fail');
             });
-
-            pokemonName = data['name'];
-            pokemonType = [];
-            pokemonMoves = [];
-            //Loop to get the Type(s) for Pokemon
-            for ( var numOfTypes = 0; numOfTypes < data['types'].length; numOfTypes++ ) {
-                //Gets Pokemon type from data retrieved and capitalizes the first letter
-                pokemonType.push( uppercaseFirstLetter(data['types'][numOfTypes]['name']) );
-            }
-
-            //Loop to get the Moves learned from Leveling up
-            for ( var numMoves = 0; numMoves < data['moves'].length; numMoves++ ) {
-                if ( data['moves'][numMoves]['learn_type'] === 'level up' ) 
-                    pokemonMoves.push( data['moves'][numMoves]['name'] );
-            }
-
-            //Lists down Pokemon data in the DOM
-            pokemonData = '<h7>Name: ' + data['name'] + '<br></h7>';
-            pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br></h7>';
-            pokemonData += '<h7>HP: ' + data['hp'] + '<br></h7>';
-            pokemonData += '<h7>Moves : ' + pokemonMoves.join(', ') + '<br></h7>';
-            document.getElementById( 'pokemon-data-area' ).innerHTML = pokemonData;
-            document.getElementById( 'pokemon-dropdown' ).innerHTML = pokemonName + ' <span class="caret"></span>';
-
-        }
+        }//End of getMasterPokemonList
         
+    }//End of populatePokemon
+
+    //Function to populate the chosen Pokemon's data (abilities, image, etc.)
+    function populatePokemonData ( data ) {
+
+        $.ajax('http://pokeapi.co/api/v1/sprite/'+ dataIdForSprite + '/', {
+          method: 'GET'
+        })
+        .done( populatePic )
+        .fail( function () {
+          console.log('Default Pic fail');
+        });
+
+        pokemonName = data['name'];
+        pokemonType = [];
+        pokemonMoves = [];
+        //Loop to get the Type(s) for Pokemon
+        for ( var numOfTypes = 0; numOfTypes < data['types'].length; numOfTypes++ ) {
+            //Gets Pokemon type from data retrieved and capitalizes the first letter
+            pokemonType.push( uppercaseFirstLetter(data['types'][numOfTypes]['name']) );
+        }
+
+        //Loop to get the Moves learned from Leveling up
+        for ( var numMoves = 0; numMoves < data['moves'].length; numMoves++ ) {
+            if ( data['moves'][numMoves]['learn_type'] === 'level up' ) 
+                pokemonMoves.push( data['moves'][numMoves]['name'] );
+        }
+
+        //Lists down Pokemon data in the DOM
+        pokemonData = '<h7>Name: ' + data['name'] + '<br></h7>';
+        pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br></h7>';
+        pokemonData += '<h7>HP: ' + data['hp'] + '<br></h7>';
+        pokemonData += '<h7>Moves : ' + pokemonMoves.join(', ') + '<br></h7>';
+        document.getElementById( 'pokemon-data-area' ).innerHTML = pokemonData;
+        document.getElementById( 'pokemon-dropdown' ).innerHTML = pokemonName + ' <span class="caret"></span>';
+
     }
-    
+     
     //Sets the default image
-    function populateDefaultPic ( data ) {
+    function populatePic ( data ) {
         document.getElementById( 'pokemon-pic-area' ).src = 'http://pokeapi.co' + data[ 'image' ];
     }
     //Function to capitalize first letter of a string
