@@ -4,6 +4,7 @@
 
 .pokemon-pic {
     height: 10em;
+    position: center;
 }
 
 .data-area {
