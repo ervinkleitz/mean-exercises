@@ -12,14 +12,18 @@ $(document).ready(function(){
     });
     
     populatePokemon('bulbasaur');
-    var chosenPokemon = 'voltorb'
     
-    document.getElementById( 'pokemon-list' ).addEventListener( 'click', displayPokemon );
+     $("li").click(function() {
+        console.log(this.id);
+     });
     
-    function displayPokemon(){
-        var pokemon = this.id;
-        console.log(pokemon);
-    }
+    var ul = document.getElementById('pokemon-list');  // Parent
+    
+    ul.addEventListener('click', function(e) {
+        if (e.target.tagName === 'LI'){
+          console.log(e.target.id);  // Check if the element is a LI
+        }
+    });
     
     //Function to populate dropdown list
     function populateDropdown ( data ){
@@ -27,7 +31,7 @@ $(document).ready(function(){
         for ( var index = 0; index < data[ 'pokemon' ].length; index++ ){
             pokemonName = data[ 'pokemon' ][index][ 'name' ];
             //Uses Pokemon's name as target for href
-            pokemonList += '<li><a href="#" id="' + pokemonName+'">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
+            pokemonList += '<li id="' + pokemonName + '"><a href="#">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
         }
         
         //Populates dropdown list and first pokemon
