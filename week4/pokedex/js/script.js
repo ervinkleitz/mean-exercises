@@ -11,19 +11,16 @@ $(document).ready(function(){
       console.log('Populate Dropdown list fail');
     });
     
-    populatePokemon('bulbasaur');
+    populatePokemon('jigglypuff');
     
-     $("li").click(function() {
-        console.log(this.id);
-     });
-    
-    var ul = document.getElementById('pokemon-list');  // Parent
-    
-    ul.addEventListener('click', function(e) {
-        if (e.target.tagName === 'LI'){
-          console.log(e.target.id);  // Check if the element is a LI
-        }
+    $("li").click(function() {
+        var pokemon = (this.id);
+        populatePokemon(pokemon);
     });
+
+    
+//************** Functions *****************//
+    
     
     //Function to populate dropdown list
     function populateDropdown ( data ){
@@ -33,10 +30,9 @@ $(document).ready(function(){
             //Uses Pokemon's name as target for href
             pokemonList += '<li id="' + pokemonName + '"><a href="#">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
         }
-        
         //Populates dropdown list and first pokemon
         document.getElementById( 'pokemon-list' ).innerHTML = pokemonList;
-    }
+    } //End of PopulateDropdown
     
     //Function to Populate info about chosen pokemon
     function populatePokemon( pokemon ) {
@@ -98,14 +94,14 @@ $(document).ready(function(){
         }
 
         //Lists down Pokemon data in the DOM
-        pokemonData = '<h7>Name: ' + data['name'] + '<br></h7>';
-        pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br></h7>';
-        pokemonData += '<h7>HP: ' + data['hp'] + '<br></h7>';
-        pokemonData += '<h7>Moves : ' + pokemonMoves.join(', ') + '<br></h7>';
+        pokemonData = '<h7>Name: ' + data['name'] + '<br><br></h7>';
+        pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br><br></h7>';
+        pokemonData += '<h7>HP: ' + data['hp'] + '<br><br></h7>';
+        pokemonData += '<h7>Moves : ' + pokemonMoves.join(', ') + '<br><br></h7>';
         document.getElementById( 'pokemon-data-area' ).innerHTML = pokemonData;
         document.getElementById( 'pokemon-dropdown' ).innerHTML = pokemonName + ' <span class="caret"></span>';
 
-    }
+    }//Ernf of populatePokemonData
      
     //Sets the default image
     function populatePic ( data ) {
@@ -115,5 +111,7 @@ $(document).ready(function(){
     function uppercaseFirstLetter( string ) {
         return string[0].toUpperCase() + string.substr(1);
     }
+
     
 });
+

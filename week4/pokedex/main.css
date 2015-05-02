@@ -13,6 +13,12 @@
 
 
 #pokemon-list {
-/*    height: 150px;*/
+    height: 150px;
     overflow: auto;
+}
+
+#pokemon-data-area {
+    padding: 5px 10px;
+    overflow: auto;
+
 }
