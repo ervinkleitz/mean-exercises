@@ -10,15 +10,14 @@ $(document).ready(function(){
     .fail( function () {
       console.log('Populate Dropdown list fail');
     });
-    
-    populatePokemon('jigglypuff');
-    
-    $("li").click(function() {
-        var pokemon = (this.id);
-        populatePokemon(pokemon);
+    //Default Pokemon
+    populatePokemon('mankey');
+    //
+    $( '#pokemon-list' ).click( function(event) {
+        var pokemon = ( event.target.id );
+        populatePokemon( pokemon );
     });
-
-    
+        
 //************** Functions *****************//
     
     
@@ -28,7 +27,7 @@ $(document).ready(function(){
         for ( var index = 0; index < data[ 'pokemon' ].length; index++ ){
             pokemonName = data[ 'pokemon' ][index][ 'name' ];
             //Uses Pokemon's name as target for href
-            pokemonList += '<li id="' + pokemonName + '"><a href="#">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
+            pokemonList += '<li><a id="' + pokemonName + '" href="#">' + uppercaseFirstLetter(pokemonName) + '</a></li>';
         }
         //Populates dropdown list and first pokemon
         document.getElementById( 'pokemon-list' ).innerHTML = pokemonList;
