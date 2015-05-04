@@ -10,9 +10,11 @@ $(document).ready(function(){
     .fail( function () {
       console.log('Populate Dropdown list fail');
     });
+	
     //Default Pokemon
     populatePokemon('mankey');
-    //
+	
+    //Event listener when clicking pokemon
     $( '#pokemon-list' ).click( function(event) {
         var pokemon = ( event.target.id );
         populatePokemon( pokemon );
@@ -92,11 +94,11 @@ $(document).ready(function(){
                 pokemonMoves.push( data['moves'][numMoves]['name'] );
         }
 
-        //Lists down Pokemon data in the DOM
+        //Lists down Pokemon data
         pokemonData = '<h7>Name: ' + data['name'] + '<br><br></h7>';
         pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br><br></h7>';
         pokemonData += '<h7>HP: ' + data['hp'] + '<br><br></h7>';
-        pokemonData += '<h7>Moves : ' + pokemonMoves.join(', ') + '<br><br></h7>';
+        pokemonData += '<h7>Moves (via Level up): ' + pokemonMoves.join(', ') + '<br><br></h7>';
         document.getElementById( 'pokemon-data-area' ).innerHTML = pokemonData;
         document.getElementById( 'pokemon-dropdown' ).innerHTML = pokemonName + ' <span class="caret"></span>';
 

@@ -1,3 +1,18 @@
+body {
+	background-image: url("img/Pikachu.jpg");
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+.img-responsive {
+    margin: 0 auto;
+}
+
+.title {
+	margin-top: 2em;
+	max-height: 7em;
+}
+
 .pokemon-area {
     padding-top: 20px;
 }
@@ -16,4 +31,3 @@
     height: 150px;
     overflow: auto;
 }
-
