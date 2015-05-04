@@ -95,10 +95,10 @@ $(document).ready(function(){
         }
 
         //Lists down Pokemon data
-        pokemonData = '<h7>Name: ' + data['name'] + '<br><br></h7>';
-        pokemonData += '<h7>Type(s): ' + pokemonType.join(', ') + '<br><br></h7>';
-        pokemonData += '<h7>HP: ' + data['hp'] + '<br><br></h7>';
-        pokemonData += '<h7>Moves (via Level up): ' + pokemonMoves.join(', ') + '<br><br></h7>';
+        pokemonData = '<h7><b>Name:</b> ' + data['name'] + '<br><br></h7>';
+        pokemonData += '<h7><b>Type(s)</b>: ' + pokemonType.join(', ') + '<br><br></h7>';
+        pokemonData += '<h7><b>HP:</b> ' + data['hp'] + '<br><br></h7>';
+        pokemonData += '<h7><b>Moves (via Level up):</b> ' + pokemonMoves.join(', ') + '<br><br></h7>';
         document.getElementById( 'pokemon-data-area' ).innerHTML = pokemonData;
         document.getElementById( 'pokemon-dropdown' ).innerHTML = pokemonName + ' <span class="caret"></span>';
 
