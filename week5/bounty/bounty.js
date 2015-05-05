@@ -5,32 +5,44 @@ var bodyParser = require('body-parser');
 app.use(bodyParser.json());
 
 var bounty = [{
-	firstName: "Obi wan",
-	lastName: "Kenobi",
+	firstname: "Obi wan",
+	lastname: "Kenobi",
+	living: false,
+	bounty: 0,
+	type: "Jedi"
+	},
+	{
+	firstname: "Anakin",
+	lastname: "Skywalker",
 	living: true,
 	bounty: 5000000,
-	type: "jedi"
-}];
+	type: "Sith"
+	}
+	];
 
 var sendToHtml = '';
 
 app.post('/bounty', function(request, response){
 	bounty.push(request.body);
-	var firstName = request.body.firstName;
-	var lastName = request.body.lastName;
-	var living = request.body.living;
-	var bounty = request.body.bounty;
-	var type = request.bpdy.type;
-	response.send('Added bounty firstName: ' + request.body.firstName + 'lastName: ' + request.body.lastName + 'Living: ' + request.body.living);
+	response.send('Data Saved');
 });
 
 app.get('/bounty', function(request, response){
-	response.json(bounty);
+	var sendToHtml = '';
+	sendToHtml += '<h1 style="text-align: center; color: red; font-family: sans-serif;">Wanted!</h1>';
+	for ( var numberOfBounties = 0; numberOfBounties < bounty.length ; numberOfBounties++ ){
+		sendToHtml += '<hr style="width: 10em;"><p style="text-align: center; color: lightblue; font-family: sans-serif;">Bounty number: ';
+		sendToHtml += ( numberOfBounties + 1 ) + '</p><hr style="width: 10em;"><ul style="list-style-type: none">';
+		for ( var key in bounty[numberOfBounties] ) {
+			sendToHtml += '<li style="text-align: center; color: grey; text-transform: capitalize;">' + key + ': <b>' 
+			sendToHtml += bounty[numberOfBounties][key] + '</b></li>';
+		}
+		sendToHtml += '</ul>';
+	}
+	
+	response.send(sendToHtml);
 });
 
-// app.delete('/bounty', function(request, response){
-// 	response.send('Deleted.')
-// });
-
 app.listen(5000);
-console.log('Server running and listening on port 5000.');
+console.log('I feel the force on port 5000.');
+
