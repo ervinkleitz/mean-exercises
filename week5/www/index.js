@@ -7,11 +7,11 @@ var uuid = require( 'uuid' );
 var gameArray = [];
 var createNewGame = true;
 var gameIndex = 0;
-//***** *****//
+//***** Declarations *****//
 
 app.use(express.static(__dirname + '/www')); //Don't worry about this!
 
-app.use(bodyParser.json());
+app.use( bodyParser.json() );
 
 app.post( '/joingame', joingame );
 
@@ -31,32 +31,41 @@ function joingame ( req, res ) {
 		createNewGame = gameArray[ gameArray.length - 1 ].addPlayer( playerId, minNumPlayers, res );
 	}
 
-	console.log( gameArray );
-
 	if ( createNewGame ) {
-		gameArray[ gameArray.length -1 ].startGame();
+		gameArray[ gameArray.length - 1 ].startGame();
 	}
 }
 
-function turn( req, res ){
+function turn ( req, res ) {
 
-	var playerList = [];
+	var data = req.body;
+	var gameObject = getGame( data[ 'game_id' ] );
+	var roundCompleted = gameObject.setPlayerTurn( data[ 'id' ], data[ 'move' ], res );
 
-	for ( var i = 0; i < players.length; i++ ) {
-		res.body[ i ][ 'score' ] = 0;
-		playerList.push( res.body[ i ] );
+	if ( roundCompleted === true ) {
+		scoring( gameObject );
 	}
 
-	// Function to compare player object moves against each other
-
-
 }
-//game object constructor
+
+//Function that gets the game object
+function getGame ( gameId ) {
+
+	for ( var i = 0; i < gameArray.length; i++ ) {
+		if ( gameId === gameArray[ i ][ 'id' ] ) {
+			return gameArray[ i ];
+		}
+	}
+}
+
+//game object class constructor
 function game () {
 
+	this.numPlayerTurns = 0;
 	this.minNum = 2;
 	this.id = uuid.v1();
 	this.players = [];
+
 	//method that adds a new player containing fields id, turn, and points
 	this.addPlayer = function( id, minPlayers, res ) {
 		this.players.push( new player( id, res ) );
@@ -70,6 +79,7 @@ function game () {
 
 		return false;
 	};
+
 	this.startGame = function() {
 
 		var listOfPlayers = [];
@@ -86,7 +96,32 @@ function game () {
 			this.players[ playerIdIndex ][ 'response' ].send( responseData );
 		}
 
-	};
+	};//end of startGame
+
+	this.setPlayerTurn = function( playerId, move, res ) {
+		var round = false; //when players have all made a move
+		for ( var j = 0; j < this.players.length; j++ ) {
+
+			var person = this.players[ j ];
+
+			if ( person[ 'id' ] === playerId ) {
+				person[ 'move' ] = move;
+				person[ 'response' ] = res;
+				this.numPlayerTurns++;
+
+				if ( this.numPlayerTurns === this.players.length ){
+					round = true;
+					this.numPlayerTurns = 0;
+				}
+
+				break;
+			}
+
+		} //end of for loop
+
+		return round;
+
+	};//end of setPlayerTurn
 }
 
 
@@ -94,9 +129,31 @@ function player ( id, response ) {
 
 	this.id = id;
 	this.response = response;
-	this.turn = '';
 	this.points = 0;
+	this.move = '';
 
+}
+
+function scoring ( gameObject ) {
+
+
+
+}
+
+function resolveRPSChoices( user1, user2 ) {
+
+	var choices = [ 'paper', 'rock', 'scissors' ];
+    var choice1Index = choices.indexOf( user1.move );
+    var choice2Index = choices.indexOf( user2.move );
+    
+    if ( Math.abs ( choice1Index - choice2Index ) === choices.length - 1) {
+        return choice1Index > choice2Index ? user1.name : user2.name;
+    }
+    else if(choice1Index === choice2Index) {
+        return "Tie";
+    } else {
+        return choice1Index > choice2Index ? user2.name : user1.name;
+    }
 }
 
 //Listening on port 4242
