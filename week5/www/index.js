@@ -32,13 +32,23 @@ function joingame ( req, res ) {
 	}
 
 	console.log( gameArray );
-	// if ( createNewGame ) {
 
-	// }
-	res.send( 'added player' );
+	if ( createNewGame ) {
+		gameArray[ gameArray.length -1 ].startGame();
+	}
 }
 
 function turn( req, res ){
+
+	var playerList = [];
+
+	for ( var i = 0; i < players.length; i++ ) {
+		res.body[ i ][ 'score' ] = 0;
+		playerList.push( res.body[ i ] );
+	}
+
+	// Function to compare player object moves against each other
+
 
 }
 //game object constructor
@@ -49,7 +59,6 @@ function game () {
 	this.players = [];
 	//method that adds a new player containing fields id, turn, and points
 	this.addPlayer = function( id, minPlayers, res ) {
-
 		this.players.push( new player( id, res ) );
 
 		if ( minPlayers > this.minNum ) {
@@ -63,11 +72,20 @@ function game () {
 	};
 	this.startGame = function() {
 
-	};
+		var listOfPlayers = [];
+		var responseData = {};
 
-	this.prototype.toString = function (){
-		var string = '';
-		string += '[' + this.minNum + '\n';
+		for ( var playerIndex = 0; playerIndex < this.players.length; playerIndex++ ) {
+			listOfPlayers.push( this.players[ playerIndex ][ 'id' ] );
+		}
+
+		responseData[ 'game_id' ] = this.id;
+		responseData[ 'players' ] = listOfPlayers;
+
+		for ( var playerIdIndex = 0; playerIdIndex < this.players.length; playerIdIndex++ ){
+			this.players[ playerIdIndex ][ 'response' ].send( responseData );
+		}
+
 	};
 }
 
