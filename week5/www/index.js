@@ -137,7 +137,6 @@ function player ( id, response ) {
 function scoring ( gameObject ) {
 
 
-
 }
 
 function resolveRPSChoices( user1, user2 ) {
