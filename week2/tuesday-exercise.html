@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>Exercise 04/14/2015</title>
+</head>
+
+	<body>
+
+		<form>
+			<input type="checkbox" class="box" value="Zero">Zero<br>
+			<input type="checkbox" class="box" value="Two">Two<br>
+			<input type="checkbox" class="box" value="One">One<br>
+		</form>
+
+		<button onclick = "printChecked()">What is checked?</button>
+
+		<p id="print-area"></p>
+
+		<script>
+		
+				function printChecked () {
+
+					var getValue = document.querySelector('.box:checked').value;
+					 document.getElementById("print-area").innerHTML = getValue;
+				}
+		</script>
+
+	</body>
+
+</html>
