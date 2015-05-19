@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Ugly things</title>
+</head>
+  <body ng-app="myApp" ng-controller="myController" >
+	  <input type="text" placeholder="Img URL" id="img_url">
+	  <input type="text" placeholder="Title" id="title">
+	  <input type="text" placeholder="Description" id="description">
+	  <button ng-click="submit()">Submit</button>
+
+	  <div ng-repeat="object in uglyThings">
+		  <h1>{{object.title}}</h1>
+		  <p>{{object.description}}</p>
+		  <img ng-src="{{object.imgUrl}}">
+	  </div>
+	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
+	  <script src="ng.js"></script>
+  </body>
+</html>
