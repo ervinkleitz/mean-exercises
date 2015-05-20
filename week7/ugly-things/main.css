@@ -1,0 +1,30 @@
+body{
+	background-color: beige;
+}
+
+input, textarea{
+	width: 25em;
+	border: 1px solid lightgrey;
+	margin-top: 0.5em;
+	padding: 1em 1em;
+}
+
+button {
+	margin-top: 1em;
+}
+
+.desc-area{
+	height: 10em;
+}
+
+.ugly-data, .input-fields, h1 {
+	text-align: center;
+}
+
+.ugly-data {
+	max-width: 25em;
+	margin: 1em auto;
+	padding: 1em;
+	border: 1px dotted grey;
+	border-radius: 5px;
+}

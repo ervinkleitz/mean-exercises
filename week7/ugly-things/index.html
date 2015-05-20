@@ -3,18 +3,29 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Ugly things</title>
+<!--	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">-->
+	<link rel="stylesheet" href="bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
 </head>
-  <body ng-app="myApp" ng-controller="myController" >
-	  <input type="text" placeholder="Img URL" id="img_url">
-	  <input type="text" placeholder="Title" id="title">
-	  <input type="text" placeholder="Description" id="description">
-	  <button ng-click="submit()">Submit</button>
-
-	  <div ng-repeat="object in uglyThings">
+  <body ng-app="myApp" ng-controller="myController" class="container">
+  
+  	<h1 class="jumbotron">Ugly Things</h1>
+	  <form class="row input-fields">
+		  <input type="text" placeholder="Img URL" ng-model="uglyThing.imgUrl" required><br>
+		  <input type="text" placeholder="Title" ng-model="uglyThing.title" required><br>
+			<textarea class="desc-area" type="textarea" placeholder="Description" ng-model="uglyThing.description" required></textarea><br>
+			<button ng-click="submit()" class="btn text-center">Submit</button>
+	  </form>
+	  
+	  <div ng-repeat="object in uglyThings" class="row ugly-data">
 		  <h1>{{object.title}}</h1>
 		  <p>{{object.description}}</p>
-		  <img ng-src="{{object.imgUrl}}">
+		  <img ng-src="{{object.imgUrl}}" class="col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3 col-sm-6 col-sm-offset-3 img-responsive">
 	  </div>
+	  
+	  <!--scripts-->
+	  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+	  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
 	  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.15/angular.min.js"></script>
 	  <script src="ng.js"></script>
   </body>
