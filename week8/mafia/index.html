@@ -4,14 +4,17 @@
 	<meta charset="UTF-8">
 	<title>Mafia</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="main.css">
 </head>
-<body ng-app="MafiaApp">
-
+<body ng-app="MafiaApp" class="container">
 	<div ng-controller="Ctrl">
-		<h1>Hit List</h1>
+	
+		<h1 class="nav navbar-default">Hit List</h1>
+		
 		<div ng-repeat="bounty in hitList">
 			<h1>{{bounty.name}}</h1>
-			<img ng-src="{{bounty.image}}">
+			<img ng-src="{{bounty.image}}" class="img-responsive">
+			<button ng-click="removeBounty($index)" class="btn btn-default">Killed</button>
 		</div>
 	</div>
 	
